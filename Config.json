@@ -1,0 +1,23 @@
+{
+  "OfficeMarker": { "X": -75.0, "Y": -818.0, "Z": 243.0 },
+  "DeskMarker": { "X": -75.6, "Y": -822.2, "Z": 243.0 },
+  "AssistantMarker": { "X": -72.5, "Y": -821.5, "Z": 243.0 },
+  "BoardroomChairMarker": { "X": -70.4, "Y": -814.3, "Z": 243.0 },
+  "HQExteriorProtestSpawn": { "X": -75.0, "Y": -818.0, "Z": 26.0 },
+  "HQInteriorSecuritySpawnPoints": [
+    { "X": -77.1, "Y": -818.8, "Z": 243.0 },
+    { "X": -73.4, "Y": -816.9, "Z": 243.0 }
+  ],
+  "InvestigatorSpawn": { "X": -74.2, "Y": -819.6, "Z": 243.0 },
+  "Keybinds": {
+    "OpenMenu": "F7",
+    "Interact": "E"
+  },
+  "Tuning": {
+    "ProtestThreshold": 30,
+    "SecurityThreshold": 70,
+    "InvestigatorThreshold": 75,
+    "DailyOverhead": 10000,
+    "BoardMeetingIntervalDays": 3
+  }
+}
