@@ -1,0 +1,12 @@
+{
+  "Treasury": 250000.0,
+  "OutstandingDebt": 0.0,
+  "Reputation": 50.0,
+  "RiskHeat": 25.0,
+  "BusinessDaysElapsed": 0,
+  "LastSaveUtc": "2026-01-01T00:00:00Z",
+  "ActiveHqOfficeId": null,
+  "Offices": [],
+  "Managers": [],
+  "ActiveDirectives": []
+}

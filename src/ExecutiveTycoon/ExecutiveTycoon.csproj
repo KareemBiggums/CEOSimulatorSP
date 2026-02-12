@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <OutputType>Library</OutputType>
+    <AssemblyName>ExecutiveTycoon</AssemblyName>
+    <RootNamespace>ExecutiveTycoon</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="ScriptHookVDotNet3">
+      <HintPath>..\..\lib\ScriptHookVDotNet3.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="LemonUI.SHVDN3">
+      <HintPath>..\..\lib\LemonUI.SHVDN3.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
