@@ -46,7 +46,8 @@ ExecutiveTycoon is a single-player ScriptHookVDotNet3 mod that turns GTA V into 
    - `lib/ScriptHookVDotNet3.dll`
    - `lib/LemonUI.SHVDN3.dll`
    - `lib/Newtonsoft.Json.dll`
-3. Build `Release` to produce `ExecutiveTycoon.dll`.
+3. In Configuration Manager, select `Release | x64` (required for SHVDN3/LemonUI x64 references).
+4. Build to produce `ExecutiveTycoon.dll`.
 
 ## Install
 

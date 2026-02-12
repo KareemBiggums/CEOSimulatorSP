@@ -94,12 +94,12 @@ public sealed class UiController
         saveItem.Activated += (_, _) =>
         {
             _save.Save(_state);
-            Screen.ShowNotification("~g~ExecutiveTycoon: Saved.");
+            Notification.Show("~g~ExecutiveTycoon: Saved.");
         };
         _dashboard.Add(saveItem);
 
         var statusItem = new NativeItem("Status Snapshot", "Display latest company simulation summary.");
-        statusItem.Activated += (_, _) => Screen.ShowNotification($"~b~{_latestSummary}");
+        statusItem.Activated += (_, _) => Notification.Show($"~b~{_latestSummary}");
         _dashboard.Add(statusItem);
 
         RefreshMenus();
@@ -128,7 +128,7 @@ public sealed class UiController
             {
                 if (owned)
                 {
-                    Screen.ShowNotification("~y~Already owned.");
+                    Notification.Show("~y~Already owned.");
                     return;
                 }
 
@@ -136,13 +136,13 @@ public sealed class UiController
                 var success = _officeManager.TryPurchase(office, mode, _state.Treasury, Game.Player.Money, out var companyCost, out var personalCost);
                 if (!success)
                 {
-                    Screen.ShowNotification("~r~Insufficient funds for purchase.");
+                    Notification.Show("~r~Insufficient funds for purchase.");
                     return;
                 }
 
                 _state.Treasury -= companyCost;
                 Game.Player.Money -= personalCost;
-                Screen.ShowNotification($"~g~Purchased {office.DisplayName}. Active HQ: {_state.ActiveHqOfficeId}");
+                Notification.Show($"~g~Purchased {office.DisplayName}. Active HQ: {_state.ActiveHqOfficeId}");
                 RefreshMenus();
             };
 
@@ -157,13 +157,13 @@ public sealed class UiController
                     var ok = _officeManager.TryUpgradeOffice(office.Id, _state.Treasury, Game.Player.Money, mode, out var companyCost, out var personalCost);
                     if (!ok)
                     {
-                        Screen.ShowNotification("~r~Upgrade unavailable or insufficient funds.");
+                        Notification.Show("~r~Upgrade unavailable or insufficient funds.");
                         return;
                     }
 
                     _state.Treasury -= companyCost;
                     Game.Player.Money -= personalCost;
-                    Screen.ShowNotification("~g~Office upgraded.");
+                    Notification.Show("~g~Office upgraded.");
                     RefreshMenus();
                 };
                 _brokerMenu.Add(upgradeItem);
@@ -189,7 +189,7 @@ public sealed class UiController
             {
                 if (_officeManager.TryActivateHq(stateOffice.OfficeId))
                 {
-                    Screen.ShowNotification($"~g~Active HQ set to {def.DisplayName}.");
+                    Notification.Show($"~g~Active HQ set to {def.DisplayName}.");
                     RefreshOwnedOfficesMenu();
                 }
             };
@@ -224,11 +224,11 @@ public sealed class UiController
         {
             if (!_sim.HireManager(role))
             {
-                Screen.ShowNotification("~y~Role already filled.");
+                Notification.Show("~y~Role already filled.");
                 return;
             }
 
-            Screen.ShowNotification($"~g~Hired {role}.");
+            Notification.Show($"~g~Hired {role}.");
             RefreshStaffMenu();
         };
         _staffMenu.Add(item);
@@ -256,11 +256,11 @@ public sealed class UiController
         {
             if (!_sim.AddDirective(type))
             {
-                Screen.ShowNotification("~y~Directive already active.");
+                Notification.Show("~y~Directive already active.");
                 return;
             }
 
-            Screen.ShowNotification($"~g~Directive issued: {type}");
+            Notification.Show($"~g~Directive issued: {type}");
             RefreshDirectivesMenu();
         };
         _directiveMenu.Add(item);
@@ -276,12 +276,12 @@ public sealed class UiController
             const int amount = 50000;
             if (!_sim.TryTransferToTreasury(Game.Player.Money, amount))
             {
-                Screen.ShowNotification("~r~Unable to inject capital.");
+                Notification.Show("~r~Unable to inject capital.");
                 return;
             }
 
             Game.Player.Money -= amount;
-            Screen.ShowNotification("~g~Capital invested.");
+            Notification.Show("~g~Capital invested.");
         };
 
         var withdraw = new NativeItem("Withdraw Dividend ($25,000)", "Blocked if low reputation or high risk.");
@@ -290,12 +290,12 @@ public sealed class UiController
             const int amount = 25000;
             if (!_sim.TryWithdrawDividend(amount))
             {
-                Screen.ShowNotification("~r~Dividend blocked by treasury/risk/reputation constraints.");
+                Notification.Show("~r~Dividend blocked by treasury/risk/reputation constraints.");
                 return;
             }
 
             Game.Player.Money += amount;
-            Screen.ShowNotification("~g~Dividend paid.");
+            Notification.Show("~g~Dividend paid.");
         };
 
         _financeMenu.Add(new NativeItem($"Treasury: ${Math.Round(_state.Treasury)}", $"Debt: ${Math.Round(_state.OutstandingDebt)}"));

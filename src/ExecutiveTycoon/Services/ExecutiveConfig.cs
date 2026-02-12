@@ -6,16 +6,16 @@ namespace ExecutiveTycoon.Services;
 
 public sealed class ExecutiveConfig
 {
-    public string DataFolderPath { get; init; }
-    public string SaveFilePath { get; init; }
-    public string LogFolderPath { get; init; }
-    public int TickSeconds { get; init; }
-    public int MinutesPerBusinessDay { get; init; }
-    public int AutoSaveSeconds { get; init; }
-    public bool EnableStaffSpawn { get; init; }
-    public int MaxStaffSpawn { get; init; }
-    public int DashboardKey { get; init; }
-    public int QuickOverlayKey { get; init; }
+    public string DataFolderPath { get; set; }
+    public string SaveFilePath { get; set; }
+    public string LogFolderPath { get; set; }
+    public int TickSeconds { get; set; }
+    public int MinutesPerBusinessDay { get; set; }
+    public int AutoSaveSeconds { get; set; }
+    public bool EnableStaffSpawn { get; set; }
+    public int MaxStaffSpawn { get; set; }
+    public int DashboardKey { get; set; }
+    public int QuickOverlayKey { get; set; }
 
     public static ExecutiveConfig Load(string path)
     {

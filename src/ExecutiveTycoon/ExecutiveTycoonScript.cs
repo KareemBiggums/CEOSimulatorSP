@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Forms;
 using ExecutiveTycoon.Models;
 using ExecutiveTycoon.Services;
 using ExecutiveTycoon.UI;
@@ -50,7 +51,7 @@ public sealed class ExecutiveTycoonScript : Script
         _nextAutoSaveUtc = DateTime.UtcNow.AddSeconds(_config.AutoSaveSeconds);
 
         _logger.Info("ExecutiveTycoon initialized.");
-        Screen.ShowNotification("~b~ExecutiveTycoon loaded. Use office desktop (E) or F7 overlay.");
+        Notification.Show("~b~ExecutiveTycoon loaded. Use office desktop (E) or F7 overlay.");
     }
 
     private void OnTick(object sender, EventArgs e)
@@ -67,11 +68,11 @@ public sealed class ExecutiveTycoonScript : Script
             _nextBusinessDayUtc = DateTime.UtcNow.AddMinutes(_config.MinutesPerBusinessDay);
             var summary = _simulation.RunBusinessDay();
             _ui.SetLatestSummary(summary);
-            Screen.ShowNotification($"~b~ExecutiveTycoon~s~ {summary}");
+            Notification.Show($"~b~ExecutiveTycoon~s~ {summary}");
 
             if (_state.BusinessDaysElapsed > 0 && _state.BusinessDaysElapsed % 7 == 0)
             {
-                Screen.ShowNotification($"~g~{_simulation.BuildWeeklyReport()}");
+                Notification.Show($"~g~{_simulation.BuildWeeklyReport()}");
             }
         }
 
@@ -97,22 +98,22 @@ public sealed class ExecutiveTycoonScript : Script
 
         if (distance < 25f)
         {
-            World.DrawMarker(MarkerType.VerticalCylinder, activeHq.DesktopPosition - new Vector3(0f, 0f, 1f), Vector3.Zero, Vector3.Zero, new Vector3(0.5f, 0.5f, 0.5f), System.Drawing.Color.FromArgb(180, 40, 120, 220));
+            World.DrawMarker(MarkerType.Cylinder, activeHq.DesktopPosition - new Vector3(0f, 0f, 1f), Vector3.Zero, Vector3.Zero, new Vector3(0.5f, 0.5f, 0.5f), System.Drawing.Color.FromArgb(180, 40, 120, 220));
         }
 
         if (distance < 1.5f)
         {
             Screen.ShowHelpTextThisFrame("Press ~INPUT_CONTEXT~ to access Executive Desktop");
-            if (Game.IsControlJustPressed(0, (Control)_config.DashboardKey) && !_ui.IsAnyMenuOpen)
+            if (Game.IsControlJustPressed((Control)_config.DashboardKey) && !_ui.IsAnyMenuOpen)
             {
                 _ui.OpenDashboard();
             }
         }
     }
 
-    private void OnKeyDown(object sender, GTA.KeyEventArgs e)
+    private void OnKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == (System.Windows.Forms.Keys)_config.QuickOverlayKey)
+        if (e.KeyCode == (Keys)_config.QuickOverlayKey)
         {
             _ui.ShowQuickOverlay();
         }
